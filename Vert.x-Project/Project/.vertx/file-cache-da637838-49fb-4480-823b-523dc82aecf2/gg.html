@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<HTML>
+<HEAD>
+ <TITLE>POS Transaction Reporting and Management Portal</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FDF5E6">
+<H2 ALIGN="CENTER">POS Transaction Reporting and Management Portal</H2>
+<script>
+	
+	function login(oFormElement)
+	{
+         var  Canteen = document.getElementById("Canteen");
+         var  POS = document.getElementById("POS");
+         var  kiosks = document.getElementById("kiosks");
+         var  users = document.getElementById("users");
+         var  Rate = document.getElementById("Rate");
+       	 var url = "http://localhost:8081";
+       	 var params="Canteen="+String(Canteen)+"&"+"POS="+String(POS)+"&"+"kiosks="+String(kiosks)+"&"+"users="+String(users)+"&"+"Rate="+String(Rate);
+	  var http = new XMLHttpRequest();
+	  http.open("POST", url, true);
+	  http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	  http.onreadystatechange = function() {//Call a function when the state changes.
+	    if(http.readyState == 4 && http.status == 200) {
+	        
+	    }
+		}
+	  http.send(params);
+	  
+	}
+	function possales(oFormElement){
+		var xhr = new XMLHttpRequest();
+		var url = "http://localhost:8082";
+		xhr.open("GET", url, true);
+		xhr.setRequestHeader("content-type", "text/plain");
+		
+    	
+		xhr.onreadystatechange = function () {
+		    if (xhr.readyState == 4 && xhr.status == 200) {
+		    	 var x = document.getElementById("myDIV2");
+		        var json = (xhr.responseText);
+		        x.querySelector(".example").innerHTML = json;
+		        console.log(json);
+		        
+		    }
+		}
+		xhr.send();
+		return false;
+	}	
+	function topselling(oFormElement){
+		var xhr = new XMLHttpRequest();
+		var url = "http://localhost:8083";
+		xhr.open("GET", url, true);
+		xhr.setRequestHeader("content-type", "text/plain");
+		
+    	
+		xhr.onreadystatechange = function () {
+		    if (xhr.readyState == 4 && xhr.status == 200) {
+		    	 var x = document.getElementById("myDIV1");
+		        var json = (xhr.responseText);
+		        x.querySelector(".example").innerHTML = json;
+		        console.log(json);
+		        
+		    }
+		}
+		xhr.send();
+		return false;
+	}
+	function exit(oFormElement){
+		var xhr = new XMLHttpRequest();
+		var url = "http://localhost:8085";
+		xhr.open("GET", url, true);
+		xhr.setRequestHeader("content-type", "text/plain");
+		
+    	
+		xhr.onreadystatechange = function () {
+		    if (xhr.readyState == 4 && xhr.status == 200) {
+		    	 
+		        
+		    }
+		}
+		xhr.send();
+		return false;
+	}
+		
+</script>
+<div style="height:25%;background-color:#ECF0F1;align=center">
+<FORM>
+ <CENTER>
+ 	<div>
+ 		 Canteen:<input id="Canteen" type="integer" placeholder=No_of_Canteen name="Canteen"><br>
+		 POS    :<input id="POS"  type="integer" placeholder=No_of_POS_per_canteen name="POS"><br>
+		 Kiosks :<input id="kiosks" placeholder=No_of_issuing_kiosks_per_canteen type="integer" name="kiosks"><br>
+		 Users  :<input id="users" type="integer" placeholder=No_of_users name="users"><br>
+		 Rate   :<input id="Rate" placeholder=Transaction_rate/minute type="integer" name="Rate"><br>
+  		<button onclick="login()">Start</button>
+  		<button onclick="exit()">Stop</button>
+  	</div>
+ 
+ </CENTER>
+</FORM>
+</div>
+<div style="height:3%;background-color:#641E16;align=center"></div>
+<div style="height:2%;background-color:#ECF0F1;align=center"></div>
+<div style="height:25%;background-color:#ECF0F1;align=center">
+
+ 	<div>
+  		<button onclick="return topselling()">Top Selling Items Today</button>
+  	</div>
+  	<div  style="color:#0000FF">
+			<p> &nbsp Top Selling Items Today<br />    &nbsp    Item        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp      Quantity<br /></h2>
+	</div>
+  	<div id="myDIV1" >
+			<p class="example"></h2>
+	</div>
+ 
+</div>
+<div style="height:3%;background-color:#641E16;align=center"></div>
+<div style="height:2%;background-color:#ECF0F1;align=center"></div>
+<div style="height:40%;background-color:#ECF0F1;align=center">
+ 	<div>
+  		<button onclick="return possales()">POS Sales Today</button>
+  	</div>
+  	<div  style="color:#0000FF">
+			<p>   &nbsp &nbspPOS Sales Today<br />    &nbsp   POS Name    &nbsp&nbsp&nbsp&nbsp&nbsp &nbsp       Amount(Rs.)<br /></h2>
+	</div>
+  	<div id="myDIV2" >
+        	<p class="example"></h2>
+    </div>
+ 
+</div>
+
+
+</BODY>
+</HTML>

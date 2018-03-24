@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+ <TITLE>A Sample Form Using GET</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FDF5E6">
+<H2 ALIGN="CENTER">A Sample Form Using GET</H2>
+<script>
+	
+	function login(oFormElement)
+	{
+         var  Canteen = document.getElementById("Canteen");
+         var  POS = document.getElementById("POS");
+         var  kiosks = document.getElementById("kiosks");
+         var  users = document.getElementById("users");
+         var  Rate = document.getElementById("Rate");
+       	 var url = "http://localhost:8081";
+       	 var params="Canteen="+String(Canteen)+"&"+"POS="+String(POS)+"&"+"kiosks="+String(kiosks)+"&"+"users="+String(users)+"&"+"Rate="+String(Rate);
+	  var http = new XMLHttpRequest();
+	  http.open("POST", url, true);
+	  http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	  http.onreadystatechange = function() {//Call a function when the state changes.
+	    if(http.readyState == 4 && http.status == 200) {
+	        alert(http.responseText);
+	    }
+		}
+	  http.send(params);
+	  
+	}
+	function receive(oFormElement){
+		var xhr = new XMLHttpRequest();
+		var url = "http://localhost:8082";
+		xhr.open("GET", url, true);
+		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		var x = document.getElementById("myDIV");
+    		x.querySelector(".example").innerHTML = "No way";
+    	console.log("hello111");
+		xhr.onreadystatechange = function () {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	    	 var x = document.getElementById("myDIV");
+    		x.querySelector(".example").innerHTML = "No way";
+	        var json = (xhr.responseText);
+	        alert(json);
+	    }
+		};
+		xhr.send();
+	}	
+		
+</script>
+<FORM>
+ <CENTER>
+ 	<div>
+ 		No of Canteen: <input id="Canteen" type="integer" name="Canteen"><br>
+		No of POS per canteen: id="POS" <input type="integer" name="POS"><br>
+		No of issuing kiosks per canteen: <input id="kiosks" type="integer" name="kiosks"><br>
+		No of users: <input id="users" type="integer" name="users"><br>
+		Transaction rate per minute: <input id="Rate" type="integer" name="Rate"><br>
+  		<button onclick="login()">Submit</button>
+  	</div>
+ 
+ </CENTER>
+</FORM>
+<FORM>
+ <CENTER>
+ 	<div>
+  		<button onclick="receive()">Top Selling Items Today</button>
+  	</div>
+ 
+ </CENTER>
+</FORM>
+<FORM>
+ <CENTER>
+ 	<div>
+  		<button onclick="receive()">POS Sales Today</button>
+  	</div>
+ 
+ </CENTER>
+</FORM>
+<div id="myDIV">
+  <p class="example">A paragraph.</p> 
+</div>
+
+</BODY>
+</HTML>

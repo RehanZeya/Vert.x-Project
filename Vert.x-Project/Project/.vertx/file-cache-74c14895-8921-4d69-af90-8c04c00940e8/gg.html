@@ -1,0 +1,40 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+ <TITLE>A Sample Form Using GET</TITLE>
+</HEAD>
+
+<BODY BGCOLOR="#FDF5E6">
+<H2 ALIGN="CENTER">A Sample Form Using GET</H2>
+
+<FORM id="echoPost" ACTION = "/" method="post">
+ <CENTER>
+ 	<div>
+ 		No of Canteen: <input type="integer" name="Canteen"><br>
+		No of POS per canteen: <input type="integer" name="POS"><br>
+		No of issuing kiosks per canteen: <input type="integer" name="kiosks"><br>
+		No of users: <input type="integer" name="users"><br>
+		Transaction rate per minute: <input type="integer" name="Rate"><br>
+  		<input type="submit" value="Submit">
+  	</div>
+ 
+ </CENTER>
+</FORM>
+<FORM ACTION="http://localhost:8080/echoPost" method="post">
+ <CENTER>
+ 	<div>
+  		<input type="submit" value="Top Selling Items Today">
+  	</div>
+ 
+ </CENTER>
+</FORM>
+<FORM ACTION="http://localhost:8080/echoPost" method="post">
+ <CENTER>
+ 	<div>
+  		<input type="submit" value="Pos Sales Today">
+  	</div>
+ 
+ </CENTER>
+</FORM>
+</BODY>
+</HTML>
